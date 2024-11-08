@@ -1,0 +1,16 @@
+<div class="flex flex-col bg-white shadow-lg rounded-lg overflow-hidden w-80 m-5">
+  <img [src]="car.image[0]" [alt]="car.model" class="w-full h-56 object-cover">
+  <div class="p-4 flex flex-col flex-grow">
+    <p class="text-gray-500 uppercase text-xs">{{ car.brand }}</p>
+    <h2 class="font-bold text-xl">{{ car.model }}</h2>
+    <p class="text-gray-500 text-sm">{{ car.typeOfEngine }}</p>
+    <p class="text-gray-400 uppercase text-xs mt-1">Motorização</p>
+    <div class="mt-4 space-y-1 text-sm text-gray-600 flex-grow">
+      <p><span class="font-bold">Valor:</span> {{ car.price }}</p>
+      <p><span class="font-bold">Ano/Modelo:</span> {{ car.yearOfManufacture + "/" + car.yearOfProduction }}</p>
+      <p><span class="font-bold">Negócio:</span> {{ car.acceptTrade ? 'Aceita troca' : 'Somente Venda' }}</p>
+      <p><span class="font-bold">Localidade:</span> {{ car.localization  }}</p>
+    </div>
+    <button class="mt-4 w-full bg-red-500 text-white py-2 rounded hover:bg-red-600" (click)="navigateToDetails(car.id)">Detalhes</button>
+  </div>
+</div>
