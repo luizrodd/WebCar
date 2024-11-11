@@ -1,15 +1,15 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace WebCar.Domain.Models
+﻿namespace WebCar.Domain.Models
 {
     public class FuelType
     {
         public FuelTypeEnum Id { get; set; }
         public string Name { get; set; }
+
+        public FuelType(FuelTypeEnum id)
+        {
+            Id = id;
+            Name = id.ToString();
+        }
     }
     public enum FuelTypeEnum
     {

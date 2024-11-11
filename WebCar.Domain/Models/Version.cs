@@ -1,7 +1,14 @@
-﻿namespace WebCar.Domain.Models
+﻿using WebCar.Domain.Core;
+
+namespace WebCar.Domain.Models
 {
-    public class Version
+    public class Version : Entity<Guid>
     {
+        public Version(string name) 
+        {
+            Id = Guid.NewGuid();
+            Name = name;
+        }
         public string Name { get; set; }
     }
 }
