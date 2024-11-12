@@ -14,7 +14,7 @@ namespace WebCar.Infrastructure.Data
         public DbSet<Favorite> Favorites { get; set; }
         public DbSet<PostOptional> PostOptionals { get; set; }
         public DbSet<Image> Images { get; set; }
-        public DbSet<Optional> Optionals { get; set; }
+        public DbSet<OptionalType> Optionals { get; set; }
         public DbSet<User> Users { get; set; }
         public DbSet<BodyType> BodyTypes { get; set; }
         public DbSet<FuelType> FuelTypes { get; set; }

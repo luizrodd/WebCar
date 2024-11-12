@@ -52,6 +52,69 @@ namespace WebCar.Infrastructure.Data.Configurations
 
             builder.Property(x => x.Description)
                 .HasMaxLength(256);
+
+            builder.HasOne<FuelType>()
+                .WithMany()
+                .HasConstraintName("FK_Post_FuelType")
+                .HasForeignKey(_ => _.FuelType)
+                .OnDelete(DeleteBehavior.ClientSetNull)
+                .IsRequired();
+
+            builder.Property(_ => _.FuelType)
+                .HasConversion(
+                _ => (int)_,
+                _ => (FuelTypeEnum)_)
+                .HasColumnName("FuelTypeId")
+                .IsRequired();
+
+            builder.HasOne<TransmissionType>()
+                .WithMany()
+                .HasConstraintName("FK_Post_TransmissionType")
+                .HasForeignKey(_ => _.TransmissionType)
+                .OnDelete(DeleteBehavior.ClientSetNull)
+                .IsRequired();
+
+            builder.Property(_ => _.TransmissionType)
+                .HasConversion(
+                _ => (int)_,
+                _ => (TransmissionTypeEnum)_)
+                .HasColumnName("TransmissionTypeId")
+                .IsRequired();
+
+            builder.HasOne<BodyType>()
+                .WithMany()
+                .HasConstraintName("FK_Post_BodyType")
+                .HasForeignKey(_ => _.BodyType)
+                .OnDelete(DeleteBehavior.ClientSetNull)
+                .IsRequired();
+
+            builder.Property(_ => _.BodyType)
+                .HasConversion(
+                _ => (int)_,
+                _ => (BodyTypeEnum)_)
+                .HasColumnName("BodyTypeId")
+                .IsRequired();
+
+            builder.HasMany(_ => _.Images)
+                .WithOne()
+                .IsRequired()
+                .HasForeignKey("PostId")
+                .OnDelete(DeleteBehavior.Cascade)
+                .HasConstraintName("FK_Image_Post");
+
+            builder.HasMany(_ => _.Optionals)
+                .WithOne()
+                .IsRequired()
+                .HasForeignKey("PostId")
+                .OnDelete(DeleteBehavior.Cascade)
+                .HasConstraintName("FK_PostOptional_Post");
+
+            builder.HasMany(_ => _.Histories)
+                .WithOne()
+                .IsRequired()
+                .HasForeignKey("PostId")
+                .OnDelete(DeleteBehavior.Cascade)
+                .HasConstraintName("FK_PostHistory_Post");
         }
     }
 }

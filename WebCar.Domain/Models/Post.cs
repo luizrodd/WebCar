@@ -4,17 +4,19 @@ namespace WebCar.Domain.Models
 {
     public class Post : Entity<Guid>
     {   
-        List<PostOptional> _optionalPosts;
-        List<Image> _images;
+        private readonly List<PostOptional> _optionalPosts;
+        private readonly List<Image> _images;
+        private readonly List<PostHistory> _histories;
         private Post()
         {
-            _optionalPosts = new List<PostOptional>();
-            _images = new List<Image>();
+            _optionalPosts = [];
+            _images = [];
+            _histories = [];
         }
         public Post(long kilometer, int yearOfManufacture, int yearOfModel, decimal price, string localization, 
             string description, bool armored, bool IPVa, bool acceptTrade, bool licensed,
             bool used, TransmissionTypeEnum clutch, FuelTypeEnum fuel, BodyTypeEnum body, 
-            Version version, List<Image> images, List<PostOptional> postOptionals)
+            Guid versionId, List<Image> images, List<PostOptional> postOptionals)
         {
             Kilometer         = kilometer;
             YearOfManufacture = yearOfManufacture;
@@ -32,13 +34,15 @@ namespace WebCar.Domain.Models
             TransmissionType  = clutch;
             FuelType          = fuel;
             BodyType          = body;
-            Version           = version;
+            _versionId        = versionId;
 
             CreatedAt         = DateTime.UtcNow;
             UpdatedAt         = DateTime.UtcNow;
 
             _optionalPosts = postOptionals;
             _images = images;
+
+            _histories.Add(new PostHistory("Post created", "System"));
         }
 
         public long Kilometer { get; private set; }
@@ -59,13 +63,9 @@ namespace WebCar.Domain.Models
         public FuelTypeEnum FuelType { get; private set; }
         public BodyTypeEnum BodyType { get; private set; }
         public Version Version { get; private set; }
+        private Guid _versionId;
         public IReadOnlyCollection<PostOptional> Optionals => _optionalPosts;
         public IReadOnlyCollection<Image> Images => _images;
-
-        public void Sold()
-        {
-            IsSold = true;
-            UpdatedAt = DateTime.Now;
-        }
+        public IReadOnlyCollection<PostHistory> Histories => _histories;
     }
 }

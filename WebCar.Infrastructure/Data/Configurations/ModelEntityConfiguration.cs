@@ -21,7 +21,7 @@ namespace WebCar.Infrastructure.Data.Configurations
               .OnDelete(DeleteBehavior.Cascade);
 
             builder.Navigation(b => b.Versions)
-                   .UsePropertyAccessMode(PropertyAccessMode.Field);
+              .UsePropertyAccessMode(PropertyAccessMode.Field);
         }
     }
 }
