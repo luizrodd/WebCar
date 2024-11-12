@@ -8,6 +8,7 @@ namespace WebCar.Infrastructure.Data.Configurations
     {
         public void Configure(EntityTypeBuilder<PostOptional> builder)
         {
+            
         }
     }
 }
