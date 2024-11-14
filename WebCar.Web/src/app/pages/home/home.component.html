@@ -1,6 +1,36 @@
 <app-header></app-header>
-<div>
-  <div class="flex flex-wrap justify-center">
+<div class="flex">
+  <div>
+    <mat-drawer-container
+      class="h-[800px] rounded-lg mt-2"
+      autosize
+      style="background-color: #292828"
+    >
+      <mat-drawer #drawer mode="side" opened style="background-color: #646464">
+        <p>Auto-resizing sidenav</p>
+        @if (showFiller) {
+        <p>Lorem, ipsum dolor sit amet consectetur.</p>
+        }
+        <button (click)="showFiller = !showFiller" mat-raised-button>
+          Toggle extra text
+        </button>
+      </mat-drawer>
+
+      <div>
+        <button
+          type="button"
+          mat-flat-button
+          class="w-full"
+          (click)="drawer.toggle()"
+        >
+          <mat-icon>menu</mat-icon>
+        </button>
+      </div>
+    </mat-drawer-container>
+  </div>
+  <div
+    class="flex flex-wrap justify-center overflow-auto overflow-y-auto h-[900px]"
+  >
     <app-card-car *ngFor="let car of cars" [car]="car"></app-card-car>
   </div>
 </div>

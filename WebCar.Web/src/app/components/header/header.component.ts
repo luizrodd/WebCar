@@ -1,22 +1,29 @@
 import { Component } from '@angular/core';
-import { MatIconModule } from '@angular/material/icon';
-import { MatButtonModule } from '@angular/material/button';
-import { MatSidenavModule } from '@angular/material/sidenav';
+import { Router } from '@angular/router';
+import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
-import { RouterModule } from '@angular/router';
 
 @Component({
   selector: 'app-header',
-  standalone: true,
-  imports: [
-    MatIconModule,
-    MatSidenavModule,
-    MatButtonModule,
-    CommonModule,
-  ],
   templateUrl: './header.component.html',
-  styleUrl: './header.component.css',
+  styleUrls: ['./header.component.css'],
+  standalone: true,
+  imports: [FormsModule, CommonModule]
 })
 export class HeaderComponent {
-  showFiller = false;
+  searchQuery: string = '';
+  isMobileMenuOpen: boolean = false;
+
+  constructor(private router: Router) {}
+
+  searchCars() {
+    if (this.searchQuery.trim()) {
+      // Redirect to the search results page
+      this.router.navigate(['/search'], { queryParams: { query: this.searchQuery } });
+    }
+  }
+
+  toggleMobileMenu() {
+    this.isMobileMenuOpen = !this.isMobileMenuOpen;
+  }
 }

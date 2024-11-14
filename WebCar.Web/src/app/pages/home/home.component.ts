@@ -1,17 +1,21 @@
+import { MatButtonModule } from '@angular/material/button';
+import { MatIconModule } from '@angular/material/icon';
 import { Component } from '@angular/core';
 import { HeaderComponent } from "../../components/header/header.component";
 import { Post } from '../../components/card-car/car.interface';
 import { CardCarComponent } from '../../components/card-car/card-car.component';
 import { CommonModule } from '@angular/common';
+import {MatSidenavModule} from '@angular/material/sidenav';
 
 @Component({
   selector: 'app-home',
   standalone: true,
-  imports: [HeaderComponent, CardCarComponent, CommonModule],
+  imports: [HeaderComponent, CardCarComponent, CommonModule, MatSidenavModule, MatIconModule, MatButtonModule],
   templateUrl: './home.component.html',
   styleUrl: './home.component.css'
 })
 export class HomeComponent {
+  showFiller = false;
   cars: Post[] = [
     {
       id: '10',
