@@ -1,12 +1,18 @@
 ﻿namespace WebCar.Domain.Models
 {
-    public class Optional
+    public class OptionalType
     {
         public OptionalTypeEnum Id { get; set; }
         public string Name { get; set; }
+
+        public OptionalType(OptionalTypeEnum id)
+        {
+            Id = id;
+            Name = id.ToString();
+        }
     }
 
-    public enum OptionalTypeEnum : int
+    public enum OptionalTypeEnum
     {
         AirConditioning = 1,
         PowerSteering = 2,

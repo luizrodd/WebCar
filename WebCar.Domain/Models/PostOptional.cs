@@ -1,14 +1,16 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using WebCar.Domain.Core;
 
 namespace WebCar.Domain.Models
 {
-    public class PostOptional
+    public class PostOptional : Entity<Guid>
     {
-        public Post Post { get; private set; }
-        public Optional Optional { get; private set; }
+        public OptionalType Optional { get; private set; }
+        private OptionalTypeEnum _optionalTypeId;
+
+        public PostOptional(OptionalTypeEnum optionalId)
+        {
+            Id = Guid.NewGuid();
+            _optionalTypeId = optionalId;
+        }
     }
 }

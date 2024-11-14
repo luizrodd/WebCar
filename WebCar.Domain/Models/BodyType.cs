@@ -1,15 +1,15 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace WebCar.Domain.Models
+﻿namespace WebCar.Domain.Models
 {
     public class BodyType
     {
         public BodyTypeEnum Id { get; set; }
         public string Name { get; set; }
+
+        public BodyType(BodyTypeEnum id)
+        {
+            Id = id;
+            Name = id.ToString();
+        }
     }
     public enum BodyTypeEnum
     {
