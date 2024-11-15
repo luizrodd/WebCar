@@ -1,7 +1,20 @@
-﻿namespace WebCar.Domain.Models
+﻿using WebCar.Domain.Core;
+
+namespace WebCar.Domain.Models
 {
-    public class User
+    public class User : Entity<Guid>
     {
+        public User(string email, string password, string name, string phoneNumber, string contact, UserTypeEnum userType)
+        {
+            Id = Guid.NewGuid();
+            Email = email;
+            Password = password;
+            Name = name;
+            PhoneNumber = phoneNumber;
+            Contact = contact;
+            UserType = userType;
+        }
+
         public string Email { get; set; }
         public string Password { get; set; }
         public string Name { get; set; }
