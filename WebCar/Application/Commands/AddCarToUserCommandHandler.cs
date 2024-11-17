@@ -28,7 +28,7 @@ namespace WebCar.Api.Application.Commands
                     request.PostDTO.IsUsed, request.PostDTO.TransmissionType,
                     request.PostDTO.FuelType, request.PostDTO.BodyType, 
                     request.PostDTO.Version.Id, 
-                    request.PostDTO.Images.Select(_ => new Image(_.Data, _.FileName, _.Description)).ToList(), 
+                    request.PostDTO.Images.Select(_ => new Image(_.FileName, _.FilePath, _.ContentType, _.FileSize)).ToList(), 
                     request.PostDTO.PostOptionals.Select(_ => new PostOptional(_.OptionalTypeId)).ToList()
                 ));
 

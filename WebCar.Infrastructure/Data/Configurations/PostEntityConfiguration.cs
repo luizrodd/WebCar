@@ -115,6 +115,18 @@ namespace WebCar.Infrastructure.Data.Configurations
                 .HasForeignKey("PostId")
                 .OnDelete(DeleteBehavior.Cascade)
                 .HasConstraintName("FK_PostHistory_Post");
+
+            builder
+                .Property<Guid>("_versionId")
+                .UsePropertyAccessMode(PropertyAccessMode.Field)
+                .HasColumnName("VersionId")
+                .IsRequired();
+
+            builder.Ignore(x => x.Version)
+                .HasOne(_ => _.Version)
+                .WithMany()
+                .HasForeignKey("_versionId")
+                .HasConstraintName("FK_Post_Version");
         }
     }
 }

@@ -4,13 +4,19 @@ namespace WebCar.Domain.Models
 {
     public class User : Entity<Guid>
     {
-        public User(string email, string password, string name, string phoneNumber, string contact, UserTypeEnum userType)
+        private readonly List<Post> _posts;
+
+        private User()
+        {
+            _posts = [];
+        }
+
+        public User(string email, string password, string name, string contact, UserTypeEnum userType)
         {
             Id = Guid.NewGuid();
             Email = email;
             Password = password;
             Name = name;
-            PhoneNumber = phoneNumber;
             Contact = contact;
             UserType = userType;
         }
@@ -18,12 +24,11 @@ namespace WebCar.Domain.Models
         public string Email { get; set; }
         public string Password { get; set; }
         public string Name { get; set; }
-        public string PhoneNumber { get; set; }
         public string Contact { get; set; }
         public UserTypeEnum UserType { get; set; }
-        public ICollection<Post> Posts { get; set; } = new List<Post>();
+        public IReadOnlyCollection<Post> Posts => _posts;
         public void AddPost(Post post){
-            Posts.Add(post);
+            _posts.Add(post);
         }
     }
 

@@ -21,7 +21,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\WebCar.Domain\WebCar.Domain.csproj" />
+    <ProjectReference Include="..\WebCar.Infrastructure\WebCar.Infrastructure.csproj" />
   </ItemGroup>
 
 </Project>

@@ -1,16 +1,25 @@
-﻿namespace WebCar.Domain.Models
-{
-    public class Image
-    {
-        public byte[] Data { get; set; }
-        public string FileName { get; set; }
-        public string Description { get; set; } 
+﻿using WebCar.Domain.Core;
 
-        public Image(byte[] data, string fileName, string description)
+namespace WebCar.Domain.Models
+{
+    public class Image : Entity<Guid>
+    {
+        public string FileName { get; private set; }
+        public string FilePath { get; private set; }
+        public string ContentType { get; private set; }
+        public long FileSize { get; private set; }
+        public DateTime CreatedAt { get; private set; }
+
+        private Image() { }
+
+        public Image(string fileName, string filePath, string contentType, long fileSize)
         {
-            Data = data;
+            Id = Guid.NewGuid();
             FileName = fileName;
-            Description = description;
+            FilePath = filePath;
+            ContentType = contentType;
+            FileSize = fileSize;
+            CreatedAt = DateTime.UtcNow;
         }
     }
 }

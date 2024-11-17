@@ -18,6 +18,7 @@ namespace WebCar.Domain.Models
             bool used, TransmissionTypeEnum clutch, FuelTypeEnum fuel, BodyTypeEnum body, 
             Guid versionId, List<Image> images, List<PostOptional> postOptionals)
         {
+            Id = Guid.NewGuid();
             Kilometer         = kilometer;
             YearOfManufacture = yearOfManufacture;
             YearOfModel       = yearOfModel;
