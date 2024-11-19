@@ -3,11 +3,11 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.11.35312.102
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WebCar.Api", "WebCar\WebCar.Api.csproj", "{6378DE8D-BBCE-4D96-A798-C93814EB0AC5}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WebCar", "WebCar\WebCar.csproj", "{6378DE8D-BBCE-4D96-A798-C93814EB0AC5}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WebCar.Domain", "WebCar.Domain\WebCar.Domain.csproj", "{EE17DFEB-2FBA-428A-BBD7-0D39E83E3794}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebCar.Infrastructure", "WebCar.Infrastructure\WebCar.Infrastructure.csproj", "{CCA86570-4F33-4994-A7CD-FF181B0EB123}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WebCar.Infrastructure", "WebCar.Infrastructure\WebCar.Infrastructure.csproj", "{CCA86570-4F33-4994-A7CD-FF181B0EB123}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
