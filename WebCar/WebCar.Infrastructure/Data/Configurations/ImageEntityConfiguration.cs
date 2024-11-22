@@ -15,6 +15,9 @@ namespace WebCar.Infrastructure.Data.Configurations
         {
             builder.HasKey(i => i.Id);
 
+            builder.Property(x => x.Id)
+                .ValueGeneratedNever();
+
             builder.Property(i => i.Id)
                 .IsRequired();
 
@@ -35,9 +38,6 @@ namespace WebCar.Infrastructure.Data.Configurations
 
             builder.Property(i => i.CreatedAt)
                 .IsRequired();
-
-            builder.HasIndex(i => i.FileName).IsUnique();
-            builder.HasIndex(i => i.FilePath).IsUnique();
         }
     }
 }

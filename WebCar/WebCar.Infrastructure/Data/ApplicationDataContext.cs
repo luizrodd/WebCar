@@ -12,9 +12,9 @@ namespace WebCar.Infrastructure.Data
         public DbSet<FuelType> FuelTypes { get; set; }
         public DbSet<Image> Images { get; set; }
         public DbSet<Model> Models { get; set; }
-        public DbSet<OptionalType> Optionals { get; set; }
+        public DbSet<CarOptionalType> Optionals { get; set; }
         public DbSet<PostHistory> PostHistories { get; set; }
-        public DbSet<PostOptional> PostOptionals { get; set; }
+        public DbSet<PostCarOptional> PostOptionals { get; set; }
         public DbSet<Post> Posts { get; set; }
         public DbSet<User> Users { get; set; }
         public DbSet<TransmissionType> TransmissionTypes { get; set; }

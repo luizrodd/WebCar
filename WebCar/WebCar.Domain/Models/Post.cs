@@ -4,7 +4,7 @@ namespace WebCar.Domain.Models
 {
     public class Post : Entity<Guid>
     {   
-        private readonly List<PostOptional> _optionalPosts;
+        private readonly List<PostCarOptional> _optionalPosts;
         private readonly List<Image> _images;
         private readonly List<PostHistory> _histories;
         private Post()
@@ -16,7 +16,7 @@ namespace WebCar.Domain.Models
         public Post(long kilometer, int yearOfManufacture, int yearOfModel, decimal price, string localization, 
             string description, bool armored, bool IPVa, bool acceptTrade, bool licensed,
             bool used, TransmissionTypeEnum clutch, FuelTypeEnum fuel, BodyTypeEnum body, 
-            Guid versionId, List<Image> images, List<PostOptional> postOptionals)
+            Guid versionId, List<Image> images, List<PostCarOptional> postOptionals) : this()
         {
             Id = Guid.NewGuid();
             Kilometer         = kilometer;
@@ -65,7 +65,7 @@ namespace WebCar.Domain.Models
         public BodyTypeEnum BodyType { get; private set; }
         public Version Version { get; private set; }
         private Guid _versionId;
-        public IReadOnlyCollection<PostOptional> Optionals => _optionalPosts;
+        public IReadOnlyCollection<PostCarOptional> Optionals => _optionalPosts;
         public IReadOnlyCollection<Image> Images => _images;
         public IReadOnlyCollection<PostHistory> Histories => _histories;
     }

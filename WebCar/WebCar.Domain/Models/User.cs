@@ -11,7 +11,7 @@ namespace WebCar.Domain.Models
             _posts = [];
         }
 
-        public User(string email, string password, string name, string contact, UserTypeEnum userType)
+        public User(string email, string password, string name, string contact, UserTypeEnum userType) : this()
         {
             Id = Guid.NewGuid();
             Email = email;
@@ -21,20 +21,22 @@ namespace WebCar.Domain.Models
             UserType = userType;
         }
 
-        public string Email { get; set; }
-        public string Password { get; set; }
-        public string Name { get; set; }
-        public string Contact { get; set; }
-        public UserTypeEnum UserType { get; set; }
+        public string Email { get; private set; }
+        public string Password { get; private set; }
+        public string Name { get; private set; }
+        public string Contact { get; private set; }
+        public bool IsAdmin { get; private set; }
+        public UserTypeEnum UserType { get; private set; }
         public IReadOnlyCollection<Post> Posts => _posts;
-        public void AddPost(Post post){
+        public void AddPost(Post post)
+        {
             _posts.Add(post);
         }
     }
 
     public class UserType{
-        public UserTypeEnum Id { get; set; }
-        public string Name {get; set; }
+        public UserTypeEnum Id { get; private set; }
+        public string Name {get; private set; }
         public UserType(UserTypeEnum id){
             Id = id;
             Name = id.ToString();

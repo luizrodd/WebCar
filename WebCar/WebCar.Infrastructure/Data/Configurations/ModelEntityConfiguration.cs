@@ -18,10 +18,8 @@ namespace WebCar.Infrastructure.Data.Configurations
             builder.HasMany(b => b.Versions)
               .WithOne()
               .HasForeignKey("ModelId")
+              .HasConstraintName("FK_Model_Version")
               .OnDelete(DeleteBehavior.Cascade);
-
-            builder.Navigation(b => b.Versions)
-              .UsePropertyAccessMode(PropertyAccessMode.Field);
         }
     }
 }

@@ -4,9 +4,9 @@ using WebCar.Domain.Models;
 
 namespace WebCar.Infrastructure.Data.Configurations
 {
-    public class OptionalTypeEntityConfiguration : IEntityTypeConfiguration<OptionalType>
+    public class CarOptionalTypeEntityConfiguration : IEntityTypeConfiguration<CarOptionalType>
     {
-        public void Configure(EntityTypeBuilder<OptionalType> builder)
+        public void Configure(EntityTypeBuilder<CarOptionalType> builder)
         {
             builder.HasKey(t => t.Id);
 

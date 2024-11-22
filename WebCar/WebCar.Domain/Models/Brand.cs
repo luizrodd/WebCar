@@ -9,12 +9,12 @@ namespace WebCar.Domain.Models
         {
             _models = [];
         }
-        public Brand(string name)
+        public Brand(string name) : this()
         {
             Id = Guid.NewGuid();
             Name = name;
         }
-        public string Name { get; set; }
+        public string Name { get; private set; }
         public IReadOnlyCollection<Model> Models => _models;
     }
 }

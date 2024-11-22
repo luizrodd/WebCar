@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.11.35312.102
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WebCar", "WebCar\WebCar.csproj", "{6378DE8D-BBCE-4D96-A798-C93814EB0AC5}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WebCar.API", "WebCar\WebCar.API.csproj", "{6378DE8D-BBCE-4D96-A798-C93814EB0AC5}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WebCar.Domain", "WebCar.Domain\WebCar.Domain.csproj", "{EE17DFEB-2FBA-428A-BBD7-0D39E83E3794}"
 EndProject

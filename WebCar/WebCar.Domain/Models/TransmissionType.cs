@@ -2,15 +2,15 @@
 {
     public class TransmissionType
     {
-        public TransmissionTypeEnum Id { get; private set; }  // Enum como chave primária
-        public string Name { get; private set; } // Nome derivado do Enum
+        public TransmissionTypeEnum Id { get; private set; }  
+        public string Name { get; private set; } 
 
-        private TransmissionType() { } // Construtor para o EF
+        private TransmissionType() { }
 
         public TransmissionType(TransmissionTypeEnum id)
         {
             Id = id;
-            Name = id.ToString();  // O nome será o nome do valor do enum
+            Name = id.ToString();  
         }
     }
 

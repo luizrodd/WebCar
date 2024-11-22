@@ -4,6 +4,6 @@ namespace WebCar.Api.Application.DTOs
 {
     public class PostOptionalDTO
     {
-        public OptionalTypeEnum OptionalTypeId { get; set; }
+        public CarOptionalTypeEnum OptionalTypeId { get; set; }
     }
 }
