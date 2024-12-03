@@ -33,18 +33,21 @@ namespace WebCar.Domain.Models
             _posts.Add(post);
         }
     }
+}
 
-    public class UserType{
-        public UserTypeEnum Id { get; private set; }
-        public string Name {get; private set; }
-        public UserType(UserTypeEnum id){
-            Id = id;
-            Name = id.ToString();
-        }
+public class UserType
+{
+    public UserTypeEnum Id { get; private set; }
+    public string Name { get; private set; }
+    public UserType(UserTypeEnum id)
+    {
+        Id = id;
+        Name = id.ToString();
     }
+}
 
-    public enum UserTypeEnum{
-        User = 0,
-        Shop = 1
-    }
+public enum UserTypeEnum
+{
+    User = 0,
+    Shop = 1
 }

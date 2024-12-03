@@ -16,6 +16,11 @@ namespace WebCar.Infrastructure.Repositories
             _entity = _dataContext.Set<TEntity>();
         }
 
+        public virtual IQueryable<TEntity> GetAll()
+        {
+            return _entity;
+        }
+
         public virtual void Add(TEntity obj)
         {
             _entity.Add(obj);

@@ -17,6 +17,12 @@ namespace WebCar.Infrastructure.Data.Configurations
             builder.Property(t => t.Name)
                    .IsRequired()
                    .HasMaxLength(50);
+
+            builder.HasData(
+                new { Id = TransmissionTypeEnum.Manual, Name = "Manual" },
+                new { Id = TransmissionTypeEnum.Automatic, Name = "Automatic" },
+                new { Id = TransmissionTypeEnum.SemiAutomatic, Name = "Semi-Automatic" }
+                );
         }
     }
 }

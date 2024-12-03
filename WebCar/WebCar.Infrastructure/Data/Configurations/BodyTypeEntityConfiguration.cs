@@ -17,6 +17,17 @@ namespace WebCar.Infrastructure.Data.Configurations
             builder.Property(t => t.Name)
                    .IsRequired()
                    .HasMaxLength(50);
+
+            builder.HasData(
+                new { Id = BodyTypeEnum.Sedan, Name = "Sedan" },
+                new { Id = BodyTypeEnum.Coupe, Name = "Coupe" },
+                new { Id = BodyTypeEnum.Hatchback, Name = "Hatchback" },
+                new { Id = BodyTypeEnum.SUV, Name = "SUV" },
+                new { Id = BodyTypeEnum.Pickup, Name = "Pickup" },
+                new { Id = BodyTypeEnum.Convertible, Name = "Convertible" },
+                new { Id = BodyTypeEnum.Minivan, Name = "Minivan" },
+                new { Id = BodyTypeEnum.Van, Name = "Van" }
+                );
         }
     }
 }
