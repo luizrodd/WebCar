@@ -2,12 +2,12 @@
 
 namespace WebCar.Domain.Models
 {
-    public class PostCarOptional : Entity<Guid>
+    public class CarOptional : Entity<Guid>
     {
-        private PostCarOptional() { }
+        private CarOptional() { }
         public CarOptionalTypeEnum CarOptionalType { get; private set; }
 
-        public PostCarOptional(CarOptionalTypeEnum optionalId)
+        public CarOptional(CarOptionalTypeEnum optionalId)
         {
             Id = Guid.NewGuid();
             CarOptionalType = optionalId;

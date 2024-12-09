@@ -4,9 +4,9 @@ using WebCar.Domain.Models;
 
 namespace WebCar.Infrastructure.Data.Configurations
 {
-    public class PostCarOptionalConfiguration : IEntityTypeConfiguration<PostCarOptional>
+    public class PostCarOptionalConfiguration : IEntityTypeConfiguration<CarOptional>
     {
-        public void Configure(EntityTypeBuilder<PostCarOptional> builder)
+        public void Configure(EntityTypeBuilder<CarOptional> builder)
         {
             builder.Property(x => x.Id)
                 .IsRequired()

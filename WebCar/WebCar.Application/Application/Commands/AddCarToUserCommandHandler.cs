@@ -29,7 +29,7 @@ namespace WebCar.Api.Application.Commands
                     request.PostDTO.FuelType, request.PostDTO.BodyType, 
                     request.PostDTO.Version.Id, 
                     request.PostDTO.Images.Select(_ => new Image(_.FileName, _.FilePath, _.ContentType, _.FileSize)).ToList(), 
-                    request.PostDTO.PostOptionals.Select(_ => new PostCarOptional(_.OptionalTypeId)).ToList()
+                    request.PostDTO.PostOptionals.Select(_ => new CarOptional(_.OptionalTypeId)).ToList()
                 ));
 
             return Task.FromResult(true);
