@@ -24,7 +24,7 @@ namespace WebCar.Domain.Models
             IsArmored = armored;
             IsLicensed = licensed;
 
-            Condition = condition;
+            ConditionType = condition;
             TransmissionType = clutch;
             FuelType = fuel;
             BodyType = body;
@@ -44,7 +44,7 @@ namespace WebCar.Domain.Models
         public bool IsLicensed { get; private set; }
         public DateTime CreatedAt { get; private set; }
         public DateTime UpdatedAt { get; private set; }
-        public CarConditionTypeEnum Condition { get; private set; }
+        public CarConditionTypeEnum ConditionType { get; private set; }
         public TransmissionTypeEnum TransmissionType { get; private set; }
         public FuelTypeEnum FuelType { get; private set; }
         public BodyTypeEnum BodyType { get; private set; }

@@ -14,7 +14,7 @@ namespace WebCar.Infrastructure.Data.Configurations
 
             builder.HasOne<CarOptionalType>()
                  .WithMany()
-                 .HasConstraintName("FK_PostCarOptional_CarOptionalType")
+                 .HasConstraintName("FK_CarOptional_CarOptionalType")
                  .HasForeignKey(_ => _.CarOptionalType)
                  .OnDelete(DeleteBehavior.ClientSetNull)
                  .IsRequired();

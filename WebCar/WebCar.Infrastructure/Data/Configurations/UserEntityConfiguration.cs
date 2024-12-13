@@ -27,14 +27,6 @@ namespace WebCar.Infrastructure.Data.Configurations
             builder.Property(x => x.Password)
                 .IsRequired()
                 .HasMaxLength(256);
-
-            builder.HasMany(_ => _.Posts)
-              .WithOne()
-              .IsRequired()
-              .HasForeignKey("UserId")
-              .OnDelete(DeleteBehavior.Cascade)
-              .HasConstraintName("FK_User_Post");
-
         }
     }
 }

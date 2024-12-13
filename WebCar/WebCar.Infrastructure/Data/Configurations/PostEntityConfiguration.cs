@@ -14,37 +14,16 @@ namespace WebCar.Infrastructure.Data.Configurations
             builder.Property(x => x.CreatedAt)
                 .IsRequired();
 
+            builder.Property(x => x.UserId)
+                .IsRequired();
+
             builder.Property(x => x.UpdatedAt)
-                .IsRequired();
-
-            builder.Property(x => x.Kilometer)
-                .IsRequired();
-
-            builder.Property(x => x.YearOfManufacture)
-                .IsRequired();
-
-            builder.Property(x => x.YearOfModel)
                 .IsRequired();
 
             builder.Property(x => x.Price)
                 .IsRequired();
 
-            builder.Property(x => x.IsLicensed)
-                .IsRequired();
-
-            builder.Property(x => x.IsUsed)
-                .IsRequired();
-
-            builder.Property(x => x.IsArmored)
-                .IsRequired();
-
-            builder.Property(x => x.IPVA)
-                .IsRequired();
-
             builder.Property(x => x.AcceptTrade)
-                .IsRequired();
-
-            builder.Property(x => x.IsSold)
                 .IsRequired();
 
             builder.Property(x => x.Localization)
@@ -53,61 +32,26 @@ namespace WebCar.Infrastructure.Data.Configurations
             builder.Property(x => x.Description)
                 .HasMaxLength(256);
 
-            builder.HasOne<FuelType>()
-                .WithMany()
-                .HasConstraintName("FK_Post_FuelType")
-                .HasForeignKey(_ => _.FuelType)
-                .OnDelete(DeleteBehavior.ClientSetNull)
-                .IsRequired();
-
-            builder.Property(_ => _.FuelType)
-                .HasConversion(
-                _ => (int)_,
-                _ => (FuelTypeEnum)_)
-                .HasColumnName("FuelTypeId")
-                .IsRequired();
-
-            builder.HasOne<TransmissionType>()
-                .WithMany()
-                .HasConstraintName("FK_Post_TransmissionType")
-                .HasForeignKey(_ => _.TransmissionType)
-                .OnDelete(DeleteBehavior.ClientSetNull)
-                .IsRequired();
-
-            builder.Property(_ => _.TransmissionType)
-                .HasConversion(
-                _ => (int)_,
-                _ => (TransmissionTypeEnum)_)
-                .HasColumnName("TransmissionTypeId")
-                .IsRequired();
-
-            builder.HasOne<BodyType>()
-                .WithMany()
-                .HasConstraintName("FK_Post_BodyType")
-                .HasForeignKey(_ => _.BodyType)
-                .OnDelete(DeleteBehavior.ClientSetNull)
-                .IsRequired();
-
-            builder.Property(_ => _.BodyType)
-                .HasConversion(
-                _ => (int)_,
-                _ => (BodyTypeEnum)_)
-                .HasColumnName("BodyTypeId")
-                .IsRequired();
-
-            builder.HasMany(_ => _.Images)
+            builder.HasOne(x => x.Car)
                 .WithOne()
-                .IsRequired()
-                .HasForeignKey("PostId")
+                .HasForeignKey<Post>("CarId")
                 .OnDelete(DeleteBehavior.Cascade)
-                .HasConstraintName("FK_Image_Post");
+                .HasConstraintName("FK_Post_Car")
+                .IsRequired();
 
-            builder.HasMany(_ => _.Optionals)
-                .WithOne()
-                .IsRequired()
-                .HasForeignKey("PostId")
-                .OnDelete(DeleteBehavior.Cascade)
-                .HasConstraintName("FK_PostOptional_Post");
+            builder.HasOne<PostStatus>()
+                .WithMany()
+                .HasConstraintName("FK_Post_PostStatus")
+                .HasForeignKey(_ => _.Status)
+                .OnDelete(DeleteBehavior.ClientSetNull)
+                .IsRequired();
+
+            builder.Property(_ => _.Status)
+                .HasConversion(
+                _ => (int)_,
+                _ => (PostStatusEnum)_)
+                .HasColumnName("PostStatusId")
+                .IsRequired();
 
             builder.HasMany(_ => _.Histories)
                 .WithOne()
@@ -116,17 +60,22 @@ namespace WebCar.Infrastructure.Data.Configurations
                 .OnDelete(DeleteBehavior.Cascade)
                 .HasConstraintName("FK_PostHistory_Post");
 
-            builder
-                .Property<Guid>("_versionId")
-                .UsePropertyAccessMode(PropertyAccessMode.Field)
-                .HasColumnName("VersionId")
-                .IsRequired();
+            builder.OwnsMany(_ => _.Images,
+                sa =>
+                {
+                    sa.Property(typeof(Guid), "Id")
+                        .HasColumnType("uniqueidentifier")
+                        .ValueGeneratedOnAdd();
 
-            builder.Ignore(x => x.Version)
-                .HasOne(_ => _.Version)
-                .WithMany()
-                .HasForeignKey("_versionId")
-                .HasConstraintName("FK_Post_Version");
+                    sa.Property(x => x.Filename)
+                        .IsRequired()
+                        .IsUnicode(true)
+                        .HasMaxLength(256);
+
+                    sa.Property(e => e.ScannedFileId)
+                        .IsRequired()
+                        .HasColumnType("uniqueidentifier");
+                });
         }
     }
 }
