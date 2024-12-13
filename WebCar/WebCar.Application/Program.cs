@@ -1,7 +1,10 @@
 using Microsoft.EntityFrameworkCore;
+using WebCar.Api.Application.Commands;
 using WebCar.Application.Application.Services;
 using WebCar.Domain.Interfaces;
+using WebCar.Domain.Repositories;
 using WebCar.Infrastructure.Data;
+using WebCar.Infrastructure.Repositories;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -17,6 +20,8 @@ builder.Services.AddSwaggerGen();
 builder.Services.AddMediatR(cfg => cfg.RegisterServicesFromAssembly(typeof(Program).Assembly));
 
 builder.Services.AddScoped<IFileManagerService, FileManagerService>();
+builder.Services.AddScoped(typeof(IExternalSourceRepository<,>), typeof(ExternalSourceRepository<,>));
+builder.Services.AddScoped<IUserRepository, UserRepository>();
 
 builder.Services.AddCors(options =>
 {

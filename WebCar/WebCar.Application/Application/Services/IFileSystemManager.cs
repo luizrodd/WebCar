@@ -1,46 +1,107 @@
-﻿namespace WebCar.Application.Application.Services
+﻿namespace WebCar.Application.Application.Services;
+public interface IFileSystemManager
 {
-    public interface IFileSystemManager
+    void Save(string path, string fileName, byte[] data);
+    void Delete(string path);
+    FileSystemObject GetInfo(string path);
+    FileSystemObject Get(string path, bool loadContent);
+}
+
+public class FileSystemManager : IFileSystemManager
+{
+    public void Save(string path, string fileName, byte[] data)
     {
-        void Delete(string file);
-        byte[] GetContent(string file);
-        /// <summary>
-        /// Get specified file from the file system.
-        /// </summary>
-        /// <param name="file"></param>
-        /// <returns></returns>
-        /// <remarks>
-        /// This method can only be called if the file was saved using the <see cref="Write(string, string, byte[])"/> method.
-        /// </remarks>
-        FileSystemInfo Get(string file);
-        /// <summary>
-        /// Get specified file from the file system.
-        /// </summary>
-        /// <remarks>
-        /// This method can only be called if the file was saved using the <see cref="Write(string, string, byte[])"/> method.
-        /// </remarks>
-        FileSystemInfo Get(string file, bool onlyInfo);
-        /// <summary>
-        /// Saves the specified data to the file system.
-        /// </summary>
-        /// <param name="fullPath">The full path where the file will be saved. This must include the filename.</param>
-        /// <param name="fileName">The name of the file to be saved. This parameter is necessary to generate the correct file name when downloading it.</param>
-        /// <param name="data">The content of the file.</param>
-        /// <example>
-        /// To hide the filename in storage:
-        /// Write("path/to/folder/231232-13213", "file.txt", data);
-        ///
-        /// To display the filename in storage:
-        /// Write("path/to/folder/file.txt", "file.txt", data);
-        /// </example>
-        void Write(string fullPath, string fileName, byte[] data);
-        string GetSASKey(string clientIP, int minutes, string filePath);
-        bool IsSASKeySupported { get; }
+        try
+        {
+            var directory = Path.GetDirectoryName(path);
+            if (!Directory.Exists(directory))
+            {
+                Directory.CreateDirectory(directory);
+            }
+
+            var fullPath = Path.Combine(path, fileName);
+
+            File.WriteAllBytes(fullPath, data);
+        }
+        catch (Exception ex)
+        {
+            throw new IOException($"Erro ao salvar o arquivo: {ex.Message}", ex);
+        }
     }
 
-    public class FileSystemInfo(FileSystemObject info, byte[] data)
+    public void Delete(string path)
     {
-        public FileSystemObject Info { get; } = info;
-        public byte[] Data { get; } = data;
+        try
+        {
+            if (File.Exists(path))
+            {
+                File.Delete(path);
+            }
+            else
+            {
+                throw new FileNotFoundException($"O arquivo em {path} não foi encontrado.");
+            }
+        }
+        catch (Exception ex)
+        {
+            throw new IOException($"Erro ao excluir o arquivo: {ex.Message}", ex);
+        }
+    }
+
+    public FileSystemObject GetInfo(string path)
+    {
+        try
+        {
+            if (!File.Exists(path))
+            {
+                throw new FileNotFoundException($"O arquivo em {path} não foi encontrado.");
+            }
+
+            var fileInfo = new FileInfo(path);
+
+            return new FileSystemObject
+            {
+                Path = fileInfo.FullName,
+                FileName = fileInfo.Name,
+                CreatedAt = fileInfo.CreationTime,
+                ModifiedAt = fileInfo.LastWriteTime
+            };
+        }
+        catch (Exception ex)
+        {
+            throw new IOException($"Erro ao obter informações do arquivo: {ex.Message}", ex);
+        }
+    }
+
+    public FileSystemObject Get(string path, bool loadContent)
+    {
+        try
+        {
+            if (!File.Exists(path))
+            {
+                throw new FileNotFoundException($"O arquivo em {path} não foi encontrado.");
+            }
+
+            var fileInfo = new FileInfo(path);
+
+            var fileSystemObject = new FileSystemObject
+            {
+                Path = fileInfo.FullName,
+                FileName = fileInfo.Name,
+                CreatedAt = fileInfo.CreationTime,
+                ModifiedAt = fileInfo.LastWriteTime
+            };
+
+            if (loadContent)
+            {
+                fileSystemObject.Data = File.ReadAllBytes(path);
+            }
+
+            return fileSystemObject;
+        }
+        catch (Exception ex)
+        {
+            throw new IOException($"Erro ao carregar o arquivo: {ex.Message}", ex);
+        }
     }
 }

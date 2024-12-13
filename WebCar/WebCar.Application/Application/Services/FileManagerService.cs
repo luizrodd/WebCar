@@ -2,16 +2,11 @@
 
 namespace WebCar.Application.Application.Services;
 
-public class FileManagerService : IFileManagerService
+
+public class FileManagerService(IFileSystemManager fileSystemManager) : IFileManagerService
 {
-    private readonly IFileSystemManager _fileSystem;
-
-    public FileManagerService(IFileSystemManager fileSystem)
-    {
-        _fileSystem = fileSystem ?? throw new ArgumentNullException(nameof(fileSystem));
-    }
-
-    private const string ROOT_FOLDER_NAME = "images";
+    private const string ROOT_FOLDER_NAME = "Images";
+    private readonly IFileSystemManager _fileSystem = fileSystemManager ?? throw new ArgumentNullException(nameof(fileSystemManager));
 
     private static string GetPostFolder(Guid userId, Guid postId, Guid fileId)
     {
@@ -20,30 +15,33 @@ public class FileManagerService : IFileManagerService
 
     public Guid Save(Guid userId, Guid postId, string fileName, byte[] data)
     {
-        var id = Guid.NewGuid();
-        var fileToSave = GetPostFolder(userId, postId, id);
-        _fileSystem.Write(fileToSave, fileName, data);
-        return id;
+        var fileId = Guid.NewGuid();
+        var filePath = GetPostFolder(userId, postId, fileId);
+
+        _fileSystem.Save(filePath, fileName, data);
+
+        return fileId;
     }
 
     public void Delete(Guid userId, Guid postId, Guid fileId)
     {
-        var file = GetPostFolder(userId, postId, fileId);
-        _fileSystem.Delete(file);
+        var filePath = GetPostFolder(userId, postId, fileId);
+
+        _fileSystem.Delete(filePath);
     }
 
     public FileSystemObject GetInfo(Guid userId, Guid postId, Guid fileId)
     {
-        var file = GetPostFolder(userId, postId, fileId);
-        var data = _fileSystem.Get(file, true);
-        return data.Info;
+        var filePath = GetPostFolder(userId, postId, fileId);
+
+        return _fileSystem.GetInfo(filePath);
     }
 
     public byte[] GetContent(Guid userId, Guid postId, Guid fileId)
     {
-        var file = GetPostFolder(userId, postId, fileId);
-        var data = _fileSystem.Get(file, false);
-        return data.Data;
-    }
+        var filePath = GetPostFolder(userId, postId, fileId);
 
+        var fileData = _fileSystem.Get(filePath, loadContent: true);
+        return fileData.Data;
+    }
 }

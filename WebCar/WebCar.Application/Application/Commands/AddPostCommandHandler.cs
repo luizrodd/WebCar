@@ -58,6 +58,5 @@ namespace WebCar.Api.Application.Commands
         }
     }
 
-
     public record AddPostCommand(AddPostRequest Post) : IRequest<bool>{}
 }
