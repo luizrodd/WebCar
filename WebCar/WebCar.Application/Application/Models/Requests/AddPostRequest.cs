@@ -8,7 +8,7 @@ public record AddPostRequest(
     string Localization,
     string Description,
     bool AcceptTrade,
-    List<IFormFile> Images,
+    IFormFile[] Images,
     long Kilometer,
     int YearOfManufacture,
     int YearOfModel,
@@ -19,5 +19,5 @@ public record AddPostRequest(
     BodyTypeEnum Body,
     CarConditionTypeEnum Condition,
     Guid VersionId,
-    List<CarOptionalTypeEnum> Optionals)
+    CarOptionalTypeEnum[] Optionals)
 {}

@@ -20,6 +20,7 @@ builder.Services.AddSwaggerGen();
 builder.Services.AddMediatR(cfg => cfg.RegisterServicesFromAssembly(typeof(Program).Assembly));
 
 builder.Services.AddScoped<IFileManagerService, FileManagerService>();
+builder.Services.AddScoped<IFileSystemManager, FileSystemManager>();
 builder.Services.AddScoped(typeof(IExternalSourceRepository<,>), typeof(ExternalSourceRepository<,>));
 builder.Services.AddScoped<IUserRepository, UserRepository>();
 
