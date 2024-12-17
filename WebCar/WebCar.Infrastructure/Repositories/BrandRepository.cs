@@ -15,7 +15,6 @@ namespace WebCar.Infrastructure.Repositories
         {
             return _entity
                 .Include(x => x.Models).ThenInclude(x => x.Versions);
-             
         }
     }
 }

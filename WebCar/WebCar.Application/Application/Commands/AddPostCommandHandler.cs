@@ -1,15 +1,14 @@
 ﻿using MediatR;
 using WebCar.Application.Application.Models.Requests;
-using WebCar.Application.Application.Services;
 using WebCar.Domain.Interfaces;
 using WebCar.Domain.Models;
 using WebCar.Domain.Repositories;
 
 namespace WebCar.Api.Application.Commands
 {
-    public class AddPostCommandHandler(IExternalSourceRepository<Post, Guid> postRepository, IUserRepository userRepository, IFileManagerService fileManagerService) : IRequestHandler<AddPostCommand, bool>
+    public class AddPostCommandHandler(IPostRepository postRepository, IUserRepository userRepository, IFileManagerService fileManagerService) : IRequestHandler<AddPostCommand, bool>
     {
-        private readonly IExternalSourceRepository<Post, Guid> _postRepository = postRepository ?? throw new ArgumentNullException(nameof(postRepository));
+        private readonly IPostRepository _postRepository = postRepository ?? throw new ArgumentNullException(nameof(postRepository));
         private readonly IUserRepository _userRepository = userRepository ?? throw new ArgumentNullException(nameof(userRepository));
         private readonly IFileManagerService _fileManagerService = fileManagerService ?? throw new ArgumentNullException(nameof(fileManagerService));
         public async Task<bool> Handle(AddPostCommand request, CancellationToken cancellationToken)
@@ -43,9 +42,11 @@ namespace WebCar.Api.Application.Commands
                 _fileManagerService
                 );
 
-            _postRepository.Save();
+            _postRepository.Add(post);
+            _postRepository.SaveChanges();
             return true;
         }
+
         static byte[] GetFileContent(IFormFile file)
         {
             if (file == null)

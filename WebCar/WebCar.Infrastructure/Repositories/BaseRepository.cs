@@ -40,5 +40,10 @@ namespace WebCar.Infrastructure.Repositories
         {
             return await _dataContext.SaveChangesAsync().ConfigureAwait(false);
         }
+
+        public void SaveChanges()
+        {
+            _dataContext.SaveChanges();
+        }
     }
 }

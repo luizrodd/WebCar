@@ -8,5 +8,6 @@ namespace WebCar.Domain.Repositories
         void Add(TEntity obj);
         TEntity Get(TKey id);
         void Update(TEntity obj);
+        void SaveChanges();
     }
 }

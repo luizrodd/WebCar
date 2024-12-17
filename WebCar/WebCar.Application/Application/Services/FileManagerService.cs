@@ -1,4 +1,7 @@
 ﻿using WebCar.Domain.Interfaces;
+using static System.Net.Mime.MediaTypeNames;
+using WebCar.Domain.Models;
+using System.IO;
 
 namespace WebCar.Application.Application.Services;
 
@@ -10,7 +13,14 @@ public class FileManagerService(IFileSystemManager fileSystemManager) : IFileMan
 
     private static string GetPostFolder(Guid userId, Guid postId, Guid fileId)
     {
-        return $"{ROOT_FOLDER_NAME}/{userId}/{postId}/{fileId}";
+        string folderPath = Path.Combine(ROOT_FOLDER_NAME, userId.ToString(), postId.ToString(), fileId.ToString());
+        Console.WriteLine($"Constructed path: {folderPath}"); // Add logging her
+        if (!Directory.Exists(folderPath))
+        {
+            Directory.CreateDirectory(folderPath);
+        }
+
+        return folderPath;
     }
 
     public Guid Save(Guid userId, Guid postId, string fileName, byte[] data)

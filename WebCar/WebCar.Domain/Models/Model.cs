@@ -16,5 +16,9 @@ namespace WebCar.Domain.Models
         }
         public string Name { get; private set; }
         public IReadOnlyCollection<Version> Versions => _versions;
+        public void AddVersion(Version version)
+        {
+            _versions.Add(version);
+        }
     }
 }

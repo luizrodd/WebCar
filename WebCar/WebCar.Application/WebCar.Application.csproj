@@ -25,7 +25,9 @@
     <ProjectReference Include="..\WebCar.Infrastructure\WebCar.Infrastructure.csproj" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="Images\" />
-  </ItemGroup>
+	<ItemGroup>
+		<None Update="Images\**\*">
+			<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+		</None>
+	</ItemGroup>
 </Project>

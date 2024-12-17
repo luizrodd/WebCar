@@ -3,7 +3,7 @@ using WebCar.Domain.Interfaces;
 
 namespace WebCar.Domain.Models
 {
-    public class Post : Entity<Guid>, IExternalSource
+    public class Post : Entity<Guid>
     {   
         private readonly List<PostStorage> _images;
         private readonly List<PostHistory> _histories;

@@ -1,4 +1,6 @@
-﻿namespace WebCar.Application.Application.Services;
+﻿using Microsoft.AspNetCore.StaticFiles;
+
+namespace WebCar.Application.Application.Services;
 public interface IFileSystemManager
 {
     void Save(string path, string fileName, byte[] data);
@@ -20,6 +22,7 @@ public class FileSystemManager : IFileSystemManager
             }
 
             var fullPath = Path.Combine(path, fileName);
+            Console.WriteLine($"Saving file to: {fullPath}"); // Add logging here
 
             File.WriteAllBytes(fullPath, data);
         }
@@ -47,54 +50,97 @@ public class FileSystemManager : IFileSystemManager
             throw new IOException($"Erro ao excluir o arquivo: {ex.Message}", ex);
         }
     }
-
-    public FileSystemObject GetInfo(string path)
+    public FileSystemObject GetInfo(string relativePath)
     {
-        try
+        string folderPath = Path.Combine(AppContext.BaseDirectory, relativePath);
+
+        if (Directory.Exists(folderPath))
         {
-            if (!File.Exists(path))
+            string[] files = Directory.GetFiles(folderPath);
+
+            if (files.Length > 0)
             {
-                throw new FileNotFoundException($"O arquivo em {path} não foi encontrado.");
+                string filePath = files[0]; 
+                Console.WriteLine($"Arquivo encontrado: {filePath}");
+
+                var fileInfo = new FileInfo(filePath);
+                var provider = new FileExtensionContentTypeProvider();
+
+                string mimeType;
+                if (!provider.TryGetContentType(fileInfo.FullName, out mimeType))
+                {
+                    mimeType = "application/octet-stream";
+                }
+
+                var fileObject = new FileSystemObject
+                {
+                    Path = fileInfo.FullName,
+                    FileName = fileInfo.Name,
+                    CreatedAt = fileInfo.CreationTime,
+                    ModifiedAt = fileInfo.LastWriteTime,
+                    MimeType = mimeType
+                };
+
+                return fileObject;
             }
-
-            var fileInfo = new FileInfo(path);
-
-            return new FileSystemObject
+            else
             {
-                Path = fileInfo.FullName,
-                FileName = fileInfo.Name,
-                CreatedAt = fileInfo.CreationTime,
-                ModifiedAt = fileInfo.LastWriteTime
-            };
+                throw new FileNotFoundException("Nenhum arquivo foi encontrado no diretório.");
+            }
         }
-        catch (Exception ex)
+        else
         {
-            throw new IOException($"Erro ao obter informações do arquivo: {ex.Message}", ex);
+            throw new DirectoryNotFoundException($"O diretório {folderPath} não foi encontrado.");
         }
     }
 
     public FileSystemObject Get(string path, bool loadContent)
     {
+        path = Path.Combine(AppContext.BaseDirectory, path);
         try
         {
-            if (!File.Exists(path))
+            var fileSystemObject = new FileSystemObject();
+
+            if (Directory.Exists(path))
             {
-                throw new FileNotFoundException($"O arquivo em {path} não foi encontrado.");
+                string[] files = Directory.GetFiles(path);
+                if (files.Length > 0)
+                {
+                    string filePath = files[0]; 
+                    var fileInfo = new FileInfo(filePath);
+
+                    fileSystemObject.Path = fileInfo.FullName;
+                    fileSystemObject.FileName = fileInfo.Name;
+                    fileSystemObject.CreatedAt = fileInfo.CreationTime;
+                    fileSystemObject.ModifiedAt = fileInfo.LastWriteTime;
+
+                    if (loadContent)
+                    {
+                        fileSystemObject.Data = File.ReadAllBytes(filePath);
+                    }
+                }
+                else
+                {
+                    throw new FileNotFoundException("Nenhum arquivo encontrado no diretório.");
+                }
             }
-
-            var fileInfo = new FileInfo(path);
-
-            var fileSystemObject = new FileSystemObject
+            else if (File.Exists(path))
             {
-                Path = fileInfo.FullName,
-                FileName = fileInfo.Name,
-                CreatedAt = fileInfo.CreationTime,
-                ModifiedAt = fileInfo.LastWriteTime
-            };
+                var fileInfo = new FileInfo(path);
 
-            if (loadContent)
+                fileSystemObject.Path = fileInfo.FullName;
+                fileSystemObject.FileName = fileInfo.Name;
+                fileSystemObject.CreatedAt = fileInfo.CreationTime;
+                fileSystemObject.ModifiedAt = fileInfo.LastWriteTime;
+
+                if (loadContent)
+                {
+                    fileSystemObject.Data = File.ReadAllBytes(path);
+                }
+            }
+            else
             {
-                fileSystemObject.Data = File.ReadAllBytes(path);
+                throw new FileNotFoundException($"O caminho '{path}' não existe.");
             }
 
             return fileSystemObject;
@@ -104,4 +150,5 @@ public class FileSystemManager : IFileSystemManager
             throw new IOException($"Erro ao carregar o arquivo: {ex.Message}", ex);
         }
     }
+
 }

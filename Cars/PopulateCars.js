@@ -13,10 +13,9 @@ const fs = require('fs');
         elementos.map(el => ({
             nome: el.textContent.trim(),
             url: el.href
-        })).filter(marca => ['BMW', 'Mercedes', 'Audi', 'Porsche'].includes(marca.nome)) // Filtra pelas marcas desejadas
+        })).filter(marca => ['Volkswagen'].includes(marca.nome)) // Filtra pelas marcas desejadas
     );
 
-    // Objeto para armazenar os dados finais
     const dadosCarros = [];
 
     // Loop para acessar cada marca
@@ -88,7 +87,7 @@ const fs = require('fs');
     }
 
     // Salva o JSON em um arquivo
-    fs.writeFileSync('dadosCarros.json', JSON.stringify(dadosCarros, null, 2), 'utf-8');
+    fs.writeFileSync('Volkswagen.json', JSON.stringify(dadosCarros, null, 2), 'utf-8');
     console.log('Arquivo dadosCarros.json salvo com sucesso.');
 
     await browser.close();
