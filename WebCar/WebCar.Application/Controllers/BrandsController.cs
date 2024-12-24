@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Mvc;
 using System.Text.Json;
 using System.Text.Json.Nodes;
+using WebCar.Application.Application.Commands;
 using WebCar.Application.Application.Commands.CreateBrand;
 using WebCar.Application.Application.Commands.CreateModel;
 using WebCar.Application.Application.Commands.CreateVersion;
@@ -45,7 +46,10 @@ namespace WebCar.Application.Controllers
                             }).ToList()
                     }).ToList();
 
-                return Ok(brands);
+                var cmd = new CreateBrandFromJsonCommand(brands);
+                var result = await _mediator.Send(cmd);
+
+                return Ok(result);
             }
             catch (JsonException ex)
             {

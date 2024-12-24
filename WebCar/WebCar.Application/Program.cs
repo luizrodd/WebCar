@@ -1,6 +1,8 @@
 using Microsoft.EntityFrameworkCore;
 using WebCar.Api.Application.Commands;
+using WebCar.Application.Application.Queries;
 using WebCar.Application.Application.Services;
+using WebCar.Application.Infrastructure;
 using WebCar.Domain.Interfaces;
 using WebCar.Domain.Repositories;
 using WebCar.Infrastructure.Data;
@@ -18,6 +20,8 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
 builder.Services.AddMediatR(cfg => cfg.RegisterServicesFromAssembly(typeof(Program).Assembly));
+builder.Services.AddScoped(provider =>
+    new SqlConnectionProvider(builder.Configuration.GetConnectionString("DefaultConnection")));
 
 builder.Services.AddScoped<IFileManagerService, FileManagerService>();
 builder.Services.AddScoped<IFileSystemManager, FileSystemManager>();

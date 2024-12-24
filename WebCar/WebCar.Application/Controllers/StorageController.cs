@@ -31,7 +31,7 @@ namespace WebCar.Application.Controllers
                 return NotFound("File content is empty.");
             }
 
-            return File(fileContent, fileInfo.MimeType, fileInfo.FileName);
+            return File(fileContent, fileInfo.MimeType);
         }
 
     }
