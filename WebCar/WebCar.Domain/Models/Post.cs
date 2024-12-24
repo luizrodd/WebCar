@@ -48,7 +48,6 @@ namespace WebCar.Domain.Models
         public DateTime CreatedAt { get; private set; }
         public DateTime UpdatedAt { get; private set; }
         public Guid UserId { get; private set; }
-
         public Car Car { get; private set; }
         public PostStatusEnum Status { get; private set; }
         public IReadOnlyCollection<PostStorage> Images => _images;

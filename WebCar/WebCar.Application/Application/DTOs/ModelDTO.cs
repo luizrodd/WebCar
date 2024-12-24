@@ -6,6 +6,6 @@ namespace WebCar.Application.Application.DTOs
     {
         public Guid Id { get; set; }
         public string Name { get; set; }
-        public List<VersionDTO> Versions { get; set; }
+        public BrandDTO Brand { get; set; }
     }
 }

@@ -27,5 +27,15 @@ namespace WebCar.Application.Controllers
 
             return Ok();
         }
+
+        //[HttpGet]
+        //public async Task<IActionResult> GetPosts()
+        //{
+        //    var query = new GetPostsQuery();
+
+        //    var result = await _mediator.Send(query);
+
+        //    return Ok(result);
+        //}
     }
 }
