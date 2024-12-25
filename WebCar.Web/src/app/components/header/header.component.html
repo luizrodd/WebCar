@@ -1,101 +1,67 @@
-<header class="text-white flex justify-between items-center shadow-md p-7 h-16">
-  <div>
-    <p>WebAutos</p>
-  </div>
+<div class="flex">
+  <header class="flex items-center justify-between w-full px-6 py-4 bg-white">
+    <div class="flex flex-col">
+      <span class="text-gray-600 mb-1">PESQUISAR</span>
+      <div class="relative">
+        <input
+          type="text"
+          class="w-[300px] border-2 border-red-500 rounded px-3 py-2 focus:outline-none"
+          placeholder="Buscar..."
+        />
+        <a href="#" class="text-red-500 text-sm absolute right-0 top-[-24px]">
+          Busca Avançada
+        </a>
+      </div>
+    </div>
 
-  <nav class="hidden md:flex space-x-8">
-    <ul class="flex space-x-8">
-      <li>
-        <a
-          routerLink="/"
-          routerLinkActive="text-orange-500"
-          class="hover:border-b-2 hover:border-red-700 cursor-pointer p-5"
-          >Comprar</a
-        >
-      </li>
-      <li>
-        <a
-          routerLink="/cars"
-          routerLinkActive="text-orange-500"
-          class="hover:border-b-2 hover:border-red-700 cursor-pointer p-5"
-          >Vender</a
-        >
-      </li>
-      <li>
-        <a
-          routerLink="/contact"
-          routerLinkActive="text-orange-500"
-            class="hover:border-b-2 hover:border-red-700 cursor-pointer p-5"
-          >Contact</a
-        >
-      </li>
-    </ul>
-  </nav>
-
-  <!-- Search Bar -->
-  <div class="flex items-center space-x-4">
-    <input
-      type="text"
-      placeholder="Search for a car..."
-      [(ngModel)]="searchQuery"
-      class="px-4 py-2 rounded-lg text-black focus:outline-none focus:ring-2 focus:ring-orange-400"
-    />
-    <button
-      (click)="searchCars()"
-      class="px-6 py-2 bg-orange-500 text-white rounded-lg hover:bg-orange-600 focus:outline-none"
-    >
-      Search
-    </button>
-  </div>
-
-  <!-- Mobile Menu Button -->
-  <button class="md:hidden text-white" (click)="toggleMobileMenu()">
-    <svg
-      xmlns="http://www.w3.org/2000/svg"
-      fill="none"
-      viewBox="0 0 24 24"
-      stroke="currentColor"
-      class="w-6 h-6"
-    >
-      <path
-        stroke-linecap="round"
-        stroke-linejoin="round"
-        stroke-width="2"
-        d="M4 6h16M4 12h16M4 18h16"
+    <div class="flex items-center">
+      <img
+        src="https://turboclass.com.br/images/logotipoquad.jpg"
+        alt="TurboClass"
+        class="h-12"
       />
-    </svg>
-  </button>
-</header>
+    </div>
 
-<!-- Mobile Menu (Optional) -->
-<div
-  *ngIf="isMobileMenuOpen"
-  class="md:hidden bg-blue-900 text-white p-4 space-y-4"
->
-  <ul class="space-y-4">
-    <li>
-      <a
-        routerLink="/"
-        routerLinkActive="text-orange-500"
-        class="block hover:text-orange-400"
-        >Home</a
+    <div class="flex items-center gap-6">
+      <a href="#" class="text-gray-600 hover:text-red-500">
+        <svg
+          class="w-6 h-6"
+          fill="currentColor"
+          viewBox="0 0 24 24"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <path
+            d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"
+          />
+        </svg>
+      </a>
+      <button
+        class="border-2 border-red-500 text-red-500 px-6 py-2 hover:bg-red-500 hover:text-white transition-colors duration-200"
       >
-    </li>
-    <li>
-      <a
-        routerLink="/cars"
-        routerLinkActive="text-orange-500"
-        class="block hover:text-orange-400"
-        >Cars for Sale</a
+        ANUNCIAR
+      </button>
+    </div>
+  </header>
+
+  <div class="relative">
+    <mat-drawer-container class="relative w-full h-screen" [className]="isExpanded ? 'w-44' : 'w-20'">
+      <mat-drawer
+        #drawer
+        mode="over"
+        fixedInViewport="true"
+        class="bg-gray-100"
       >
-    </li>
-    <li>
-      <a
-        routerLink="/contact"
-        routerLinkActive="text-orange-500"
-        class="block hover:text-orange-400"
-        >Contact</a
-      >
-    </li>
-  </ul>
+        <div *ngIf="drawer.opened" class="p-4">
+          <p>Auto-resizing sidenav</p>
+          <button (click)="drawer.toggle()">Close</button>
+        </div>
+      </mat-drawer>
+
+      <div class="p-4">
+        <button *ngIf="!drawer.opened" type="button" mat-button (click)="drawer.toggle()">
+          Toggle sidenav
+        </button>
+      </div>
+    </mat-drawer-container>
+  </div>
 </div>

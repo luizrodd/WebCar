@@ -7,6 +7,7 @@ using WebCar.Application.Application.Commands.CreateBrand;
 using WebCar.Application.Application.Commands.CreateModel;
 using WebCar.Application.Application.Commands.CreateVersion;
 using WebCar.Application.Application.DTOs.Json;
+using WebCar.Application.Application.Queries;
 
 namespace WebCar.Application.Controllers
 {
@@ -15,6 +16,15 @@ namespace WebCar.Application.Controllers
     public class BrandsController(IMediator mediator) : ControllerBase
     {
         private IMediator _mediator = mediator ?? throw new ArgumentNullException(nameof(mediator));
+
+        [HttpGet]
+        public async Task<IActionResult> GetBrands()
+        {
+            var query = new GetAllBrandQuery();
+            var result = await _mediator.Send(query);
+
+            return Ok(result);
+        }
 
         [HttpPost("json")]
         public async Task<IActionResult> CreateFromJson(IFormFile file)
