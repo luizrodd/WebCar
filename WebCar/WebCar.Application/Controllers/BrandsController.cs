@@ -6,8 +6,10 @@ using WebCar.Application.Application.Commands;
 using WebCar.Application.Application.Commands.CreateBrand;
 using WebCar.Application.Application.Commands.CreateModel;
 using WebCar.Application.Application.Commands.CreateVersion;
+using WebCar.Application.Application.DTOs;
 using WebCar.Application.Application.DTOs.Json;
 using WebCar.Application.Application.Queries;
+using WebCar.Domain.Models;
 
 namespace WebCar.Application.Controllers
 {
@@ -18,9 +20,24 @@ namespace WebCar.Application.Controllers
         private IMediator _mediator = mediator ?? throw new ArgumentNullException(nameof(mediator));
 
         [HttpGet]
+        [ProducesResponseType(typeof(IEnumerable<BrandDetailsDTO>), 200)]
+        [ProducesResponseType(204)]
         public async Task<IActionResult> GetBrands()
         {
             var query = new GetAllBrandQuery();
+            var result = await _mediator.Send(query);
+            if(result == null)
+                return NoContent();
+
+            return Ok(result);
+        }
+
+        [HttpGet("posts")]
+        [ProducesResponseType(typeof(IEnumerable<BrandDetailsDTO>), 200)]
+        [ProducesResponseType(204)]
+        public async Task<IActionResult> GetBrandsFromPosts()
+        {
+            var query = new GetBrandsFromPostQuery();
             var result = await _mediator.Send(query);
 
             return Ok(result);
@@ -72,7 +89,9 @@ namespace WebCar.Application.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> CreateBrand(string name)
+        [ProducesResponseType(typeof(Guid), 200)]
+        [ProducesResponseType(400)]
+        public async Task<IActionResult> Create(string name)
         {
             if(string.IsNullOrWhiteSpace(name))
                 return BadRequest("Nome da marca não fornecido.");
@@ -86,7 +105,9 @@ namespace WebCar.Application.Controllers
         }
 
         [HttpPost("{brandId}/model")]
-        public async Task<IActionResult> CreateModel(Guid brandId, string name)
+        [ProducesResponseType(typeof(Guid), 200)]
+        [ProducesResponseType(400)]
+        public async Task<IActionResult> AddModel(Guid brandId, string name)
         {
             if (brandId == Guid.Empty)
                 return BadRequest("Id da marca não fornecido.");
@@ -102,7 +123,9 @@ namespace WebCar.Application.Controllers
         }
 
         [HttpPost("model/{modelId}/version")]
-        public async Task<IActionResult> CreateVersion(Guid modelId, string name)
+        [ProducesResponseType(typeof(Guid), 200)]
+        [ProducesResponseType(400)]
+        public async Task<IActionResult> AddVersion(Guid modelId, string name)
         {
             if (modelId == Guid.Empty)
                 return BadRequest("Id do modelo não fornecido.");
@@ -116,5 +139,7 @@ namespace WebCar.Application.Controllers
 
             return Ok(result);
         }
+
+
     }
 }

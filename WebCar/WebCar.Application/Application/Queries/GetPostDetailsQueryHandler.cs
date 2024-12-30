@@ -12,8 +12,6 @@ public class GetPostDetailsQueryHandler(SqlConnectionProvider sqlConnectionProvi
     public async Task<PostDetailsDTO> Handle(GetPostDetailsQuery request, CancellationToken cancellationToken)
     {
         string sql = @"
-use [DB-CAR-APP]
-
 SELECT 
     p.Id,
 	p.Description,

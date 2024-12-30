@@ -21,7 +21,7 @@ public class GetPostsQueryHandler(SqlConnectionProvider  sqlConnectionProvider) 
         await connection.OpenAsync(cancellationToken);
 
         string sql = @"
-SELECT 
+    SELECT 
     p.Id,
     p.Price,
 	JSON_QUERY(
