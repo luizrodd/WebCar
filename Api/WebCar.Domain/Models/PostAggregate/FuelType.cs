@@ -1,4 +1,4 @@
-﻿namespace WebCar.Domain.Models
+﻿namespace WebCar.Domain.Models.PostAggregate
 {
     public class FuelType
     {

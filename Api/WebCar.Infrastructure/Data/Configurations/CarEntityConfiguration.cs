@@ -6,6 +6,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using WebCar.Domain.Models;
+using WebCar.Domain.Models.CarAggregate;
+using WebCar.Domain.Models.PostAggregate;
 
 namespace WebCar.Infrastructure.Data.Configurations
 {

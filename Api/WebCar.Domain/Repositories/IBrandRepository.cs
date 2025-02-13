@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using WebCar.Domain.Models;
+using WebCar.Domain.Models.BrandAggregate;
 
 namespace WebCar.Domain.Repositories
 {

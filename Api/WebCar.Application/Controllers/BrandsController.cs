@@ -22,7 +22,7 @@ namespace WebCar.Application.Controllers
         [HttpGet]
         [ProducesResponseType(typeof(IEnumerable<BrandDetailsDTO>), 200)]
         [ProducesResponseType(204)]
-        public async Task<IActionResult> GetBrands()
+        public async Task<IActionResult> Get()
         {
             var query = new GetAllBrandQuery();
             var result = await _mediator.Send(query);
@@ -35,7 +35,7 @@ namespace WebCar.Application.Controllers
         [HttpGet("posts")]
         [ProducesResponseType(typeof(IEnumerable<BrandDetailsDTO>), 200)]
         [ProducesResponseType(204)]
-        public async Task<IActionResult> GetBrandsFromPosts()
+        public async Task<IActionResult> GetFromPosts()
         {
             var query = new GetBrandsFromPostQuery();
             var result = await _mediator.Send(query);

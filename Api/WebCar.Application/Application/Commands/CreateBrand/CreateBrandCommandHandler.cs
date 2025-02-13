@@ -1,6 +1,7 @@
 ﻿using MediatR;
 using Microsoft.IdentityModel.Tokens;
 using WebCar.Domain.Models;
+using WebCar.Domain.Models.BrandAggregate;
 using WebCar.Domain.Repositories;
 using WebCar.Infrastructure.Repositories;
 

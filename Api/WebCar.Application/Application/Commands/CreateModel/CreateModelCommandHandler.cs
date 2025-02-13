@@ -1,5 +1,6 @@
 ﻿using MediatR;
 using WebCar.Domain.Models;
+using WebCar.Domain.Models.BrandAggregate;
 using WebCar.Domain.Repositories;
 
 namespace WebCar.Application.Application.Commands.CreateModel;

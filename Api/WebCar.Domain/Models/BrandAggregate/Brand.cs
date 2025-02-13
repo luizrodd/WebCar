@@ -1,8 +1,8 @@
 ﻿using WebCar.Domain.Core;
 
-namespace WebCar.Domain.Models
+namespace WebCar.Domain.Models.BrandAggregate
 {
-    public class Brand : Entity<Guid>, IExternalSource
+    public class Brand : Entity<Guid>
     {
         private readonly List<Model> _models;
         private Brand()

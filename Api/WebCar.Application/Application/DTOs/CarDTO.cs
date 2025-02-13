@@ -1,5 +1,6 @@
 ﻿using WebCar.Api.Application.DTOs;
 using WebCar.Domain.Models;
+using WebCar.Domain.Models.PostAggregate;
 
 namespace WebCar.Application.Application.DTOs
 {

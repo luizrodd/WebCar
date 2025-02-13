@@ -1,4 +1,4 @@
-﻿using WebCar.Domain.Models;
+﻿using WebCar.Domain.Models.CarAggregate;
 
 namespace WebCar.Api.Application.DTOs
 {

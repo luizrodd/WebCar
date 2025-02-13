@@ -1,6 +1,6 @@
 ﻿using WebCar.Domain.Core;
 
-namespace WebCar.Domain.Models
+namespace WebCar.Domain.Models.PostAggregate
 {
     public class Car : Entity<Guid>
     {
@@ -10,11 +10,11 @@ namespace WebCar.Domain.Models
             _optionalPosts = [];
         }
         public Car(long kilometer, int yearOfManufacture, int yearOfModel, bool armored, bool licensed,
-            TransmissionTypeEnum clutch, 
-            FuelTypeEnum fuel, 
+            TransmissionTypeEnum clutch,
+            FuelTypeEnum fuel,
             BodyTypeEnum body,
             CarConditionTypeEnum condition,
-            Guid versionId, 
+            Guid versionId,
             List<CarOptional> postOptionals) : this()
         {
             Id = Guid.NewGuid();
@@ -28,7 +28,7 @@ namespace WebCar.Domain.Models
             TransmissionType = clutch;
             FuelType = fuel;
             BodyType = body;
-            _versionId = versionId;
+            VersionId = versionId;
 
             CreatedAt = DateTime.UtcNow;
             UpdatedAt = DateTime.UtcNow;
@@ -48,8 +48,7 @@ namespace WebCar.Domain.Models
         public TransmissionTypeEnum TransmissionType { get; private set; }
         public FuelTypeEnum FuelType { get; private set; }
         public BodyTypeEnum BodyType { get; private set; }
-        public Version Version { get; private set; }
-        private Guid _versionId;
+        public Guid VersionId { get; private set; }
         public IReadOnlyCollection<CarOptional> Optionals => _optionalPosts;
     }
 }

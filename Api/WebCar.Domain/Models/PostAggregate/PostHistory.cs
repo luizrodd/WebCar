@@ -1,6 +1,6 @@
 ﻿using WebCar.Domain.Core;
 
-namespace WebCar.Domain.Models
+namespace WebCar.Domain.Models.PostAggregate
 {
     public class PostHistory : Entity<Guid>
     {
@@ -12,7 +12,7 @@ namespace WebCar.Domain.Models
             Id = Guid.NewGuid();
             CreatedAt = DateTime.Now;
             CreatedBy = createdBy;
-            Description = description;  
+            Description = description;
         }
     }
 }

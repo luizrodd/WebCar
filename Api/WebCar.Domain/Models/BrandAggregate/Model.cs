@@ -1,6 +1,6 @@
 ﻿using WebCar.Domain.Core;
 
-namespace WebCar.Domain.Models
+namespace WebCar.Domain.Models.BrandAggregate
 {
     public class Model : Entity<Guid>
     {

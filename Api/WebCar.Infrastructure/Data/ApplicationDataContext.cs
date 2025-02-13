@@ -1,5 +1,8 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using WebCar.Domain.Models;
+using WebCar.Domain.Models.BrandAggregate;
+using WebCar.Domain.Models.CarAggregate;
+using WebCar.Domain.Models.PostAggregate;
 
 namespace WebCar.Infrastructure.Data
 {

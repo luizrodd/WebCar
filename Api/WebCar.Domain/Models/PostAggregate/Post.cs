@@ -1,7 +1,7 @@
 ﻿using WebCar.Domain.Core;
 using WebCar.Domain.Interfaces;
 
-namespace WebCar.Domain.Models
+namespace WebCar.Domain.Models.PostAggregate
 {
     public class Post : Entity<Guid>
     {   

@@ -4,7 +4,6 @@ using WebCar.Api.Application.Commands;
 using WebCar.Application.Application.Models.Filters;
 using WebCar.Application.Application.Models.Requests;
 using WebCar.Application.Application.Queries;
-using static WebCar.Application.Application.Queries.GetPostsQueryHandler;
 
 namespace WebCar.Application.Controllers
 {
@@ -13,14 +12,16 @@ namespace WebCar.Application.Controllers
     public class PostsController : ControllerBase
     {
         private readonly IMediator _mediator;
+        private readonly IPostQueries _postQueries;
 
-        public PostsController(IMediator mediator)
+        public PostsController(IMediator mediator, IPostQueries postQueries)
         {
             _mediator = mediator ?? throw new ArgumentNullException(nameof(mediator));
+            _postQueries = postQueries;
         }
 
         [HttpPost]
-        public async Task<IActionResult> CreatePost([FromForm] AddPostRequest request)
+        public async Task<IActionResult> Create([FromForm] AddPostRequest request)
         {
             if (request == null) return BadRequest();
 
@@ -32,38 +33,19 @@ namespace WebCar.Application.Controllers
         }
 
         [HttpGet]
-        public async Task<IActionResult> GetPosts([FromQuery] PostFilter filter)
+        public async Task<IActionResult> Get([FromQuery] PostFilter filter)
         {
-            var query = new GetPostsQuery(
-                filter.StartKilometer,
-                filter.EndKilometer,
-                filter.StartYear,
-                filter.EndYear,
-                filter.StartPrice,
-                filter.EndPrice,
-                filter.Armored,
-                filter.Licensed,
-                filter.Localization,
-                filter.Clutch,
-                filter.Fuel,
-                filter.Body,
-                filter.Condition,
-                filter.VersionId,
-                filter.ModelId,
-                filter.BrandId
-                );
-
-            var result = await _mediator.Send(query);
-
+            var result = await _postQueries.Get(filter);
+            if (result == null) return NoContent();
+            
             return Ok(result);
         }
 
         [HttpGet("{id}")]
-        public async Task<IActionResult> GetPostDetails(Guid id)
+        public async Task<IActionResult> GetDetails(Guid id)
         {
-            var query = new GetPostDetailsQuery(id);
-
-            var result = await _mediator.Send(query);
+            var result = await _postQueries.GetById(id);
+            if (result == null) return BadRequest();
 
             return Ok(result);
         }
