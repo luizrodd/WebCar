@@ -1,8 +1,7 @@
 using Microsoft.EntityFrameworkCore;
-using WebCar.Api.Application.Commands;
+using WebCar.Application.Application.Infrastructure;
 using WebCar.Application.Application.Queries;
 using WebCar.Application.Application.Services;
-using WebCar.Application.Infrastructure;
 using WebCar.Domain.Interfaces;
 using WebCar.Domain.Repositories;
 using WebCar.Infrastructure.Data;
@@ -55,6 +54,7 @@ if (app.Environment.IsDevelopment())
     app.UseSwaggerUI();
 }
 
+app.UseStaticFiles();
 app.UseHttpsRedirection();
 
 app.UseAuthorization();

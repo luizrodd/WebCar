@@ -15,5 +15,7 @@ namespace WebCar.Api.Application.DTOs
     public class Images 
     {
         public Guid ScannedFileId { get; set; }
+        public string Filename { get; set; }
+        public string Path { get; set; }
     }
 }

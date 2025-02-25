@@ -1,12 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using WebCar.Domain.Models;
-using WebCar.Domain.Models.CarAggregate;
 using WebCar.Domain.Models.PostAggregate;
 
 namespace WebCar.Infrastructure.Data.Configurations
@@ -33,15 +26,7 @@ namespace WebCar.Infrastructure.Data.Configurations
             builder.Property(x => x.IsArmored)
                 .IsRequired();
 
-            builder.Ignore(x => x.Version)
-                .HasOne(_ => _.Version)
-                .WithMany()
-                .HasForeignKey("_versionId")
-                .HasConstraintName("FK_Post_Version");
-
-            builder.Property<Guid>("_versionId")
-                .UsePropertyAccessMode(PropertyAccessMode.Field)
-                .HasColumnName("VersionId")
+            builder.Property(x => x.VersionId)
                 .IsRequired();
 
             builder.HasOne<FuelType>()

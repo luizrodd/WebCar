@@ -68,7 +68,7 @@ namespace WebCar.Application.Controllers
                                 Name = modelGroup.Key,
                                 Versions = modelGroup.Select(item => new VersionJsonDTO
                                 {
-                                    Name = $"{item["versao"]}"
+                                    Name = $"{item["ano"]}"
                                 }).ToList()
                             }).ToList()
                     }).ToList();

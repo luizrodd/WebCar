@@ -1,6 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using Microsoft.EntityFrameworkCore;
 using WebCar.Domain.Models;
+using WebCar.Domain.Models.BrandAggregate;
 
 namespace WebCar.Infrastructure.Data.Configurations
 {

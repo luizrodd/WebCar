@@ -28,8 +28,18 @@
   </ItemGroup>
 
 	<ItemGroup>
-		<None Update="Images\**\*">
+		<None Update="wwwroot\Images\**\*">
 			<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
 		</None>
+	</ItemGroup>
+
+	<ItemGroup>
+	  <None Include="wwwroot\Images\9d9db459-6a8c-4226-9320-bc7311c777ba\7545f59c-8739-487c-99a3-84fe8776c565\8d2316f2-f1f7-4bfd-9714-86700b2ea9c2\552b5ecvtlz81.png" />
+	  <None Include="wwwroot\Images\9d9db459-6a8c-4226-9320-bc7311c777ba\7545f59c-8739-487c-99a3-84fe8776c565\a7df58fa-4997-490b-9881-34c2ae49aa25\pexels-christian-fussi-136437166-17275300.jpg" />
+	  <None Include="wwwroot\Images\9d9db459-6a8c-4226-9320-bc7311c777ba\f93f84c0-b5fa-4d1d-88b3-e6fd2678935b\3a042bd7-0f24-423f-9369-11ff9ab2eda8\552b5ecvtlz81 %281%29.png" />
+	  <None Include="wwwroot\Images\bebe5c3d-e01a-4fbe-91c0-8c33b0db353d\dcbbe419-b827-4e97-9506-8483abbe9b20\ad7ca1cd-9d61-4b53-8866-54611271d143\421830.jpg" />
+	  <None Include="wwwroot\Images\e919a6ff-0269-463a-8e0c-d3ac3c02f5cb\85233912-3562-439e-8263-718a21bfae53\6749d1d2-7698-4439-8a0e-7bf3aec303b0\198706.jpg" />
+	  <None Include="wwwroot\Images\e919a6ff-0269-463a-8e0c-d3ac3c02f5cb\85233912-3562-439e-8263-718a21bfae53\77c49bfa-0f62-4022-9993-92697ae8303f\pexels-christian-fussi-136437166-17275300.jpg" />
+	  <None Include="wwwroot\Images\e919a6ff-0269-463a-8e0c-d3ac3c02f5cb\85233912-3562-439e-8263-718a21bfae53\8e053f21-2c54-4ef5-a2c7-f313720cb03f\552b5ecvtlz81.png" />
 	</ItemGroup>
 </Project>

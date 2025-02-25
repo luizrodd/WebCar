@@ -61,7 +61,9 @@ SELECT
     p.CreatedAt,
     JSON_QUERY(
         (
-            SELECT i.ScannedFileId
+            SELECT 
+                i.ScannedFileId,
+                i.Filename
             FROM PostStorage i 
             WHERE i.PostId = p.Id
             FOR JSON PATH
@@ -129,7 +131,9 @@ FOR JSON PATH, WITHOUT_ARRAY_WRAPPER
     p.CreatedAt,
     JSON_QUERY(
         (
-            SELECT i.ScannedFileId
+            SELECT 
+                i.ScannedFileId,
+                i.Filename
             FROM PostStorage i 
             WHERE i.PostId = p.Id
             FOR JSON PATH

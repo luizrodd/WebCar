@@ -3,9 +3,9 @@ using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
 namespace WebCar.Infrastructure.Data.Configurations
 {
-    public class VersionEntityConfiguration : IEntityTypeConfiguration<Domain.Models.Version>
+    public class VersionEntityConfiguration : IEntityTypeConfiguration<Domain.Models.BrandAggregate.Version>
     {
-        public void Configure(EntityTypeBuilder<Domain.Models.Version> builder)
+        public void Configure(EntityTypeBuilder<Domain.Models.BrandAggregate.Version> builder)
         {
             builder.Property(x => x.Id)
                 .ValueGeneratedNever();

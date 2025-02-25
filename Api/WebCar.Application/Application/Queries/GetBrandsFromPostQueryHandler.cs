@@ -1,9 +1,8 @@
 ﻿using Dapper;
 using MediatR;
 using Newtonsoft.Json;
-using WebCar.Api.Application.DTOs;
 using WebCar.Application.Application.DTOs;
-using WebCar.Application.Infrastructure;
+using WebCar.Application.Application.Infrastructure;
 
 namespace WebCar.Application.Application.Queries;
 

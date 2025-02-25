@@ -1,7 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using WebCar.Domain.Models;
 using WebCar.Domain.Models.BrandAggregate;
-using WebCar.Domain.Models.CarAggregate;
 using WebCar.Domain.Models.PostAggregate;
 
 namespace WebCar.Infrastructure.Data
@@ -17,7 +16,7 @@ namespace WebCar.Infrastructure.Data
         public DbSet<FuelType> FuelType { get; set; }
         public DbSet<Brand> Brands { get; set; }
         public DbSet<Model> Models { get; set; }
-        public DbSet<Domain.Models.Version> Versions { get; set; }
+        public DbSet<Domain.Models.BrandAggregate.Version> Versions { get; set; }
         public DbSet<PostStorage> PostStorage { get; set; }
         public DbSet<PostHistory> PostHistories { get; set; }
         public DbSet<CarOptional> CarOptionals { get; set; }

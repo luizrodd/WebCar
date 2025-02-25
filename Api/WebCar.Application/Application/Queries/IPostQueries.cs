@@ -1,13 +1,10 @@
-﻿using Azure.Core;
-using Dapper;
-using MediatR;
+﻿using Dapper;
 using Newtonsoft.Json;
-using System.Threading;
 using WebCar.Api.Application.DTOs;
 using WebCar.Application.Application.DTOs;
+using WebCar.Application.Application.Infrastructure;
 using WebCar.Application.Application.Models.Filters;
 using WebCar.Application.Application.Queries.Resources;
-using WebCar.Application.Infrastructure;
 
 namespace WebCar.Application.Application.Queries
 {
@@ -44,7 +41,6 @@ namespace WebCar.Application.Application.Queries
             });
 
             List<PostDTO> postList = JsonConvert.DeserializeObject<List<PostDTO>>(json);
-
             return postList;
         }
 

@@ -4,6 +4,8 @@ using WebCar.Api.Application.Commands;
 using WebCar.Application.Application.Models.Filters;
 using WebCar.Application.Application.Models.Requests;
 using WebCar.Application.Application.Queries;
+using WebCar.Application.Application.Services;
+using WebCar.Domain.Interfaces;
 
 namespace WebCar.Application.Controllers
 {
@@ -37,9 +39,18 @@ namespace WebCar.Application.Controllers
         {
             var result = await _postQueries.Get(filter);
             if (result == null) return NoContent();
-            
+
+            foreach (var post in result)
+            {
+                foreach (var image in post.Images)
+                {
+                    image.Path = $"https://localhost:7193/Images/{post.User.Id}/{post.Id}/{image.ScannedFileId}/{image.Filename}";
+                }
+            }
+
             return Ok(result);
         }
+
 
         [HttpGet("{id}")]
         public async Task<IActionResult> GetDetails(Guid id)

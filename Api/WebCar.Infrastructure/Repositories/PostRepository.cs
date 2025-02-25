@@ -1,4 +1,5 @@
 ﻿using WebCar.Domain.Models;
+using WebCar.Domain.Models.PostAggregate;
 using WebCar.Domain.Repositories;
 using WebCar.Infrastructure.Data;
 

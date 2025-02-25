@@ -2,6 +2,7 @@
 using WebCar.Application.Application.Models.Requests;
 using WebCar.Domain.Interfaces;
 using WebCar.Domain.Models;
+using WebCar.Domain.Models.PostAggregate;
 using WebCar.Domain.Repositories;
 
 namespace WebCar.Api.Application.Commands

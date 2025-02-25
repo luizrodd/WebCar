@@ -1,6 +1,6 @@
 ﻿using MediatR;
 using WebCar.Application.Application.DTOs.Json;
-using WebCar.Domain.Models;
+using WebCar.Domain.Models.BrandAggregate;
 using WebCar.Domain.Repositories;
 
 namespace WebCar.Application.Application.Commands;
@@ -18,7 +18,7 @@ public class CreateBrandFromJsonCommandHandler(IBrandRepository brandRepository)
                 var modelEntity = new Model(model.Name);
                 foreach (var version in model.Versions)
                 {
-                    modelEntity.AddVersion(new Domain.Models.Version(version.Name));
+                    modelEntity.AddVersion(new Domain.Models.BrandAggregate.Version(version.Name));
                 }
                 brandEntity.AddModel(modelEntity);
             }

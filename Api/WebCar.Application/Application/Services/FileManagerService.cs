@@ -1,20 +1,18 @@
 ﻿using WebCar.Domain.Interfaces;
-using static System.Net.Mime.MediaTypeNames;
-using WebCar.Domain.Models;
-using System.IO;
 
 namespace WebCar.Application.Application.Services;
 
 
-public class FileManagerService(IFileSystemManager fileSystemManager) : IFileManagerService
+public class FileManagerService(IFileSystemManager fileSystemManager, IWebHostEnvironment environment) : IFileManagerService
 {
     private const string ROOT_FOLDER_NAME = "Images";
     private readonly IFileSystemManager _fileSystem = fileSystemManager ?? throw new ArgumentNullException(nameof(fileSystemManager));
+    private readonly IWebHostEnvironment _env = environment ?? throw new ArgumentNullException(nameof(environment));
 
-    private static string GetPostFolder(Guid userId, Guid postId, Guid fileId)
+    private string GetPostFolder(Guid userId, Guid postId, Guid fileId)
     {
-        string folderPath = Path.Combine(ROOT_FOLDER_NAME, userId.ToString(), postId.ToString(), fileId.ToString());
-        Console.WriteLine($"Constructed path: {folderPath}"); // Add logging her
+        string folderPath = Path.Combine(_env.WebRootPath, ROOT_FOLDER_NAME, userId.ToString(), postId.ToString(), fileId.ToString());
+        Console.WriteLine($"Constructed path: {folderPath}"); 
         if (!Directory.Exists(folderPath))
         {
             Directory.CreateDirectory(folderPath);

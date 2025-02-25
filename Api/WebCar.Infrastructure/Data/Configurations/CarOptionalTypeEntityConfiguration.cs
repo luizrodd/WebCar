@@ -1,6 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
-using WebCar.Domain.Models.CarAggregate;
+using WebCar.Domain.Models.PostAggregate;
 
 namespace WebCar.Infrastructure.Data.Configurations;
 
