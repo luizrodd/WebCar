@@ -9,7 +9,6 @@ using WebCar.Application.Application.Commands.CreateVersion;
 using WebCar.Application.Application.DTOs;
 using WebCar.Application.Application.DTOs.Json;
 using WebCar.Application.Application.Queries;
-using WebCar.Domain.Models;
 
 namespace WebCar.Application.Controllers
 {

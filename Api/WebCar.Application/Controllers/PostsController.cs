@@ -1,6 +1,11 @@
 ﻿using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using WebCar.Api.Application.Commands;
+using WebCar.Api.Application.DTOs;
+using WebCar.Application.Application.Commands.ApprovePost;
+using WebCar.Application.Application.Commands.CancelPost;
+using WebCar.Application.Application.Commands.SoldPost;
+using WebCar.Application.Application.DTOs;
 using WebCar.Application.Application.Models.Filters;
 using WebCar.Application.Application.Models.Requests;
 using WebCar.Application.Application.Queries;
@@ -23,6 +28,8 @@ namespace WebCar.Application.Controllers
         }
 
         [HttpPost]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
         public async Task<IActionResult> Create([FromForm] AddPostRequest request)
         {
             if (request == null) return BadRequest();
@@ -34,7 +41,43 @@ namespace WebCar.Application.Controllers
             return Ok();
         }
 
+        [HttpPost("{id}/sold")]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        public async Task<IActionResult> Sold(Guid id)
+        {
+            if (id == Guid.Empty) return BadRequest();
+
+            var command = new SoldPostCommand(id);
+            var result = await _mediator.Send(command);
+            return Ok();
+        }
+
+        [HttpPost("{id}/cancel")]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        public async Task<IActionResult> Canceled(Guid id)
+        {
+            if (id == Guid.Empty) return BadRequest();
+            var command = new CanceledPostCommand(id);
+            var result = await _mediator.Send(command);
+            return Ok();
+        }
+
+        [HttpPost("{id}/approve")]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        public async Task<IActionResult> Approve(Guid id)
+        {
+            if (id == Guid.Empty) return BadRequest();
+            var command = new ApprovePostCommand(id);
+            var result = await _mediator.Send(command);
+            return Ok();
+        }
+
         [HttpGet]
+        [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(List<PostDTO>))]
+        [ProducesResponseType(StatusCodes.Status204NoContent)]
         public async Task<IActionResult> Get([FromQuery] PostFilter filter)
         {
             var result = await _postQueries.Get(filter);
@@ -53,6 +96,8 @@ namespace WebCar.Application.Controllers
 
 
         [HttpGet("{id}")]
+        [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(PostDetailsDTO))]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
         public async Task<IActionResult> GetDetails(Guid id)
         {
             var result = await _postQueries.GetById(id);
